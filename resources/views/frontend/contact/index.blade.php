@@ -127,7 +127,7 @@
 @section('footer-script')
     <script src="https://www.google.com/recaptcha/api.js"></script>
     <!--gmap js -->
-    <script src="https://maps.google.com/maps/api/js?key=AIzaSyAzZ4aG6edNVf1xfPup8uB7DjdwXbokTCM"></script>
+    <script src="https://maps.google.com/maps/api/js?key="></script>
     <script type="text/javascript">
         function onSubmit(token) {
             document.getElementById("contact-form").submit();
