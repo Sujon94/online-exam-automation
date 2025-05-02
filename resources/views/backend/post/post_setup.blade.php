@@ -1,0 +1,495 @@
+<?php
+/**
+ *Created by PhpStorm
+ *Created at ২৯/৯/২১ ১:২১ PM
+ */
+?>
+@extends("backend.layouts.default")
+
+@section('title')
+@endsection
+
+@section('header-style')
+@endsection
+
+@section('content')
+    <div class="card">
+        <div class="card-body">
+            <h3>Post Setup</h3>
+            <hr>
+            <form method="post" class="needs-validation" enctype="multipart/form-data" novalidate
+                  @if(isset($insertedData))
+                  action="{{ route('post-write.update',['id'=>$insertedData->post_id]) }}">
+                @method('PUT')
+                @else
+                    action="{{route('post-write.store')}}">
+                @endif
+                @csrf
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="post_for" class="form-label required">Post For</label>
+                        <select class="form-control" name="post_for" id="post_for" required>
+                            <option value="">Select one</option>
+                            <option {{ (old('post_for',isset($insertedData) ? $insertedData->post_for : '') == 'B') ? 'selected' : '' }} value="B">
+                                Blog
+                            </option>
+                            <option {{ (old('post_for',isset($insertedData) ? $insertedData->post_for : '') == 'S') ? 'selected' : '' }} value="S">
+                                Service
+                            </option>
+                        </select>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please select a one.
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label required" for="category_id">Category</label>
+                        <select name="category_id" id="category_id" class="form-control" required
+                                data-preselected="{{old('category_id',isset($insertedData) ? $insertedData->post_category_id : '')}}">
+                            <option value="">Select a Category</option>
+                            {{--@forelse($categories as $category)
+                                <option {{ ($category->post_category_id == old("category_id",isset($insertedData) ? $insertedData->post_category_id : '')) ? 'Selected' : '' }} value="{{$category->post_category_id}}">{{$category->name}}</option>
+                            @empty
+
+                            @endforelse--}}
+                        </select>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please select a category.
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" for="contact_person_mbl" >Contact Person Mobile</label>
+                        <input type="text" class="form-control" id="contact_person_mbl" name="contact_person_mbl"
+                               value="{{ old('contact_person_mbl',isset($insertedData) ? $insertedData->contact_person_mbl : '') }}">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please write title.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <label for="post_title" class="form-label required">Post Title</label>
+                        <input type="text" class="form-control" required id="post_title" name="post_title"
+                               value="{{ old('post_title',isset($insertedData) ? $insertedData->title : '') }}">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please write title.
+                        </div>
+                        @if ($errors->has('post_title'))
+                            <div class="text-danger">
+                                {{$errors->first('post_title')}}
+                            </div>
+                        @endif
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mb-2">
+                            <span>Slug:</span><span id="slug_view"><span
+                                        style="text-decoration: underline">
+                                <a href="">
+                                {{ old("slug",isset($insertedData) ? isset($insertedData->slug) ? url('/course/course-detail').'/'.$insertedData->slug : "" : "") }}
+                                </a>
+                            </span></span>
+                            <input type="hidden" id="slug" name="slug"
+                                   value="{{ old('course_summary_en',isset($insertedData) ? $insertedData->slug : '') }}"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6 d-none post_image_field">
+                        <div class="mb-3">
+                            <label for="post_image" class="form-label required">Post Image (Allowed dimension:
+                                1100x350)</label>
+                            <div class="input-group" id="post_image">
+                                <input name="post_image" type="file" id="post_image_input" disabled
+                                       {{ isset($insertedData) ? (isset($insertedData->post_photo) ? "" : "required" ) : ""  }} class="form-control"
+                                       accept="image/*">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please upload a social image.
+                                </div>
+                            </div>
+                            @error('post_image')
+                            <div class="error">{{ $message }}</div>
+                            @enderror
+
+                            <br>
+                            @if(isset($insertedData))
+                                @if (isset($insertedData->post_photo))
+                                    <p>File Name: {{$insertedData->post_photo->doc_file_name}} (<a
+                                                href="{{route('post-write.file-download',['id'=>$insertedData->post_photo->self_development_file_id])}}"><i
+                                                    class="bx bx-download"></i></a>)
+                                    </p>
+                                @endif
+                            @endisset
+
+                        </div>
+                    </div>
+                    {{--NEW VERSION SECTION ALT TAG START--}}
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="doc_img_alt_tag" class="form-label ">Post Image Alt Tag</label>
+                            <input type="text" class="form-control" id="doc_img_alt_tag" name="doc_img_alt_tag"
+                                   value="{{ old('doc_img_alt_tag',isset($insertedData) ? $insertedData->post_photo->doc_img_alt_tag : '') }}">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please give post image alt tag.
+                            </div>
+                        </div>
+                    </div>
+                    {{--NEW VERSION SECTION ALT TAG END--}}
+                    <div class="col-md-6 form-group">
+                        {{--For blog post image, for service social image--}}
+                        <label for="social_image" class="form-label required social_image">Post Image (Allowed
+                            dimension: 1200x630)</label>
+                        <div class="input-group" id="social_image">
+                            <input name="social_image" type="file"
+                                   {{ isset($insertedData) ? (isset($insertedData->post_photo) ? "" : "required" ) : "required"  }} class="form-control"
+                                   accept="image/*">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please upload an image.
+                            </div>
+                        </div>
+                        <!--                    <span class=" badge badge-danger text-danger mb-2">Image upload must be Height:500px Width:800px.&nbsp;</span>-->
+                        @error('social_image')
+                        <div class="error">{{ $message }}</div>
+                        @enderror
+
+                        <br>
+
+                        @if(isset($insertedData))
+                            @if (isset($insertedData->post_photo))
+                                <p>File Name: {{$insertedData->post_photo->social_file_name}} (<a
+                                            href="{{route('batch-setup.file-download',['id'=>$insertedData->post_photo->self_development_file_id, 'type'=>\App\Enums\ImageType::PATH])}}"><i
+                                                class="bx bx-download"></i></a>)
+                                </p>
+                            @endif
+                        @endisset
+                    </div>
+                    {{--NEW VERSION SECTION ALT TAG START--}}
+                    <div class="col-md-6 post_image_field d-none">
+                        <div class="mb-3">
+                            <label for="social_img_alt_tag" class="form-label ">Social Image Alt Tag</label>
+                            <input type="text" class="form-control" id="social_img_alt_tag" name="social_img_alt_tag"
+                                   value="{{ old('social_img_alt_tag',isset($insertedData) ? $insertedData->post_photo->social_file_alt_tag : '') }}">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please give social image alt tag.
+                            </div>
+                        </div>
+                    </div>
+                    {{--NEW VERSION SECTION ALT TAG END--}}
+                </div>
+                {{--OLD VERSION SECTION ALT TAG START--}}
+                {{--<div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="doc_img_alt_tag" class="form-label ">Post Image Alt Tag</label>
+                            <input type="text" class="form-control" id="doc_img_alt_tag" name="doc_img_alt_tag"
+                                   value="{{ old('doc_img_alt_tag',isset($insertedData) ? $insertedData->post_photo->doc_img_alt_tag : '') }}">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please give post image alt tag.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 post_image_field d-none">
+                        <div class="mb-3">
+                            <label for="social_img_alt_tag" class="form-label ">Social Image Alt Tag</label>
+                            <input type="text" class="form-control" id="social_img_alt_tag" name="social_img_alt_tag"
+                                   value="{{ old('social_img_alt_tag',isset($insertedData) ? $insertedData->post_photo->social_file_alt_tag : '') }}">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please give social image alt tag.
+                            </div>
+                        </div>
+                    </div>
+                </div>--}}
+                {{--OLD VERSION SECTION ALT TAG END--}}
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <label for="post_summary" class="form-label">Post Summary</label>
+                        <textarea type="text" class="form-control" id="post_summary" name="post_summary">{{ old('post_summary',isset($insertedData) ? $insertedData->post_summary : '') }}</textarea>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please write summary.
+                        </div>
+                        @if ($errors->has('post_summary'))
+                            <div class="text-danger">
+                                {{$errors->first('post_summary')}}
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                <div class="col-md-12 form-group">
+                    <label for="post_body" class="form-label required">Post Body</label>
+                    <textarea class="form-control" required rows="6" name="post_body"
+                              id="post_body">{{ old('post_body',isset($insertedData) ? $insertedData->body : '') }}</textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please write body content.
+                    </div>
+                    @if ($errors->has('post_body'))
+                        <div class="text-danger">
+                            {{$errors->first('post_body')}}
+                        </div>
+                    @endif
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label for="meta_title" class="form-label ">Meta Title</label>
+                        <textarea class="form-control" rows="2" name="meta_title"
+                                  id="meta_title">{{ old('meta_title',isset($insertedData) ? $insertedData->meta_title : '') }}</textarea>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please give a meta title.
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+
+                        <label for="meta_description" class="form-label ">Meta Description</label>
+                        <textarea class="form-control" rows="2" name="meta_description"
+                                  id="meta_description">{{ old('meta_description',isset($insertedData) ? $insertedData->meta_description : '') }}</textarea>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please give a meta description.
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="post_status" class="form-label">Post Status</label>
+                        <div class="mb-3">
+                            <select class="form-control" name="post_status" id="post_status">
+                                @foreach(\App\Enums\PostStatus::POST_STATUS as $key=>$status)
+                                    <option {{ ($key == old("post_status",isset($insertedData) ? $insertedData->status : '')) ? 'Selected' : '' }} value="{{$key}}">{{$status}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="">
+                            <button class="btn btn-primary my-4 mx-2" type="submit">@isset($insertedData)
+                                    Update
+                                @else
+                                    Save
+                                @endisset</button>
+                            @isset($insertedData)
+                                <a href="{{route('post-write.index')}}" class="btn btn-info my-4">Cancel</a>
+                            @endisset
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h4>Post List</h4>
+            <hr>
+            <div class="table-responsive">
+                <table class="table table-bordered table-sm dataTable"
+                       id="post_table" {{--style="display: none"--}}>
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>SL</th>
+                        <th>Post For</th>
+                        <th>Post Title</th>
+                        <th>Post Category</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('footer-script')
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            ClassicEditor
+                .create(document.querySelector('#post_body'))
+                .catch(error => {
+                    console.error(error);
+                });
+
+            $(".remove_file").on('click', function () {
+                let fileId = $(this).data('id');
+
+                swal.fire({
+                    text: 'Remove Confirm?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'No'
+                }).then((result) => {
+                    if (result.value == true) {
+                        let request = $.ajax({
+                            url: APP_URL + "/backend/post-write-file/" + fileId,
+                            type: "DELETE",
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token()}}'
+                            }
+                        });
+
+                        request.done(function (res) {
+                            if (res.response_code != "99") {
+                                Swal.fire({
+                                    icon: 'success',
+                                    text: res.response_msg,
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                    allowOutsideClick: false
+                                }).then(function () {
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire({text: res.response_msg, type: 'error'});
+                            }
+                        });
+
+                        request.fail(function (jqXHR, textStatus) {
+                            console.log(jqXHR);
+                        });
+                    }
+                })
+            });
+
+            let postTable = $('#post_table').dataTable({
+                processing: true,
+                serverSide: true,
+                searching: true,
+                ajax: {
+                    url: APP_URL + '/backend/post-write-datalist',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    data: function (params) {
+                        // Retrieve dynamic parameters
+                        var dt_params = $('#invoiceBillSearch').data('dt_params');
+                        // Add dynamic parameters to the data object sent to the server
+                        if (dt_params) {
+                            $.extend(params, dt_params);
+                        }
+                    }
+                },
+                "columns": [
+                    {"data": 'DT_RowIndex', "name": 'DT_RowIndex'},
+                    {"data": "post_for"},
+                    {"data": "title"},
+                    {"data": "category"},
+                    {"data": "status"},
+                    {"data": "action"}
+                ]
+            });
+
+            $("#post_for").on('change', function () {
+                let postFor = $("#post_for :selected").val();
+                get_categories($("#post_for :selected").val(), '')
+                prepare_form_for_service();
+            })
+            get_categories($("#post_for :selected").val(), $("#category_id").data('preselected'))
+            prepare_form_for_service();
+
+            function prepare_form_for_service() {
+                let slug = $("#slug").val();
+                if ($("#post_for :selected").val() == 'S') {
+                    if (!nullEmptyUndefinedChecked(slug)) {
+                        let url = '{{url("/service/service-detail")}}';
+                        $("#slug_view").html(' <span style="text-decoration: underline"><a href="#">' + url + '/' + slug + '</a></span>');
+                    }
+                    $(".post_image_field").removeClass('d-none');
+                    $("#post_image_input").removeAttr('disabled');
+                    $(".social_image").text('Social Image (Allowed dimension: 1200x630)');
+                } else {
+                    if (!nullEmptyUndefinedChecked(slug)) {
+                        let url = '{{url("/web-post/web-post-detail")}}';
+                        $("#slug_view").html(' <span style="text-decoration: underline"><a href="#">' + url + '/' + slug + '</a></span>');
+                    }
+                    $(".post_image_field").addClass('d-none');
+                    $("#post_image_input").attr('disabled', 'disabled');
+                    $(".social_image").text('Post Image (Allowed dimension: 1200x630)');
+                }
+            }
+
+            function get_categories(postFor, preSelected) {
+                let response = $.ajax({
+                    'url': '{{route('ajax.get-post-categories')}}',
+                    'data': {postFor: postFor, preSelected: preSelected}
+                });
+                response.done(function (e) {
+                    $("#category_id").html(e);
+                })
+                response.fail(function (jqXHr, textStatus) {
+                    console.log(jqXHr);
+                })
+            }
+
+            $("#post_title").on('keyup', function () {
+                if (!nullEmptyUndefinedChecked($(this).val())) {
+                    getSlag($(this).val(), 'post', setSlug);
+                } else {
+                    $("#slug_view").html("");
+                    $("#slug").val("");
+                }
+            });
+
+            function setSlug(response) {
+                if (response.response_code == '1') {
+                    let url = '';
+                    if ($("#post_for :selected").val() == 'S') {
+                        url = '{{url("/service/service-detail")}}';
+                    } else {
+                        url = '{{url("/web-post/web-post-detail")}}';
+                    }
+                    $("#slug_view").html(' <span style="text-decoration: underline"><a href="#">' + url + '/' + response.slug + '</a></span>');
+                    $("#slug").val(response.slug);
+                } else {
+                    $("#slug_view").html("");
+                    $("#slug").val("");
+                }
+            }
+        });
+
+    </script>
+
+@endsection
+

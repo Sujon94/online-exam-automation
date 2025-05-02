@@ -1,0 +1,48 @@
+/***
+    Author: Pavel
+    Description: Theme Custom CSS.
+***/
+
+.cus-bg-color {
+    background: #20B876;
+}
+
+
+.cus-bg-ho-color {
+    background: blue !important; /*#ecedf1!important;*/
+}
+
+/*** Course Details Page Start ***/
+.cus-li ul li {
+    list-style: auto;
+}
+
+small.badge.font-size-unset {
+    font-size: unset;
+}
+
+.bg-col-sd-1 {
+    background-color: #194395!important;
+}
+ul li i.check-icon-col-sz  {
+    color: #194395 !important;
+}
+/*** Course Details Page End ***/
+
+/*Slider Animation CSS Start*/
+.slider-animation {
+    /*-webkit-animation: slide 18s ease infinite;*/
+    animation: slide 16s infinite;
+}
+/*Animation activated by keyframes*/
+@keyframes slide{
+    0%   {transform: translateX(0);}
+    25%  {transform: translateX(0);}
+    30%  {transform: translateX(-100%);}
+    50%  {transform: translateX(-100%);}
+    55%  {transform: translateX(-200%);}
+    75%  {transform: translateX(-200%);}
+    80%  {transform: translateX(-300%);}
+    100% {transform: translateX(-300%);}
+}
+/*Slider Animation CSS End*/

@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: 
+Disallow: /backend/
+
+Sitemap: https://domain.com/sitemap.xml

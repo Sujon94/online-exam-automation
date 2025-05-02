@@ -1,0 +1,340 @@
+/* Medium Layout: 1280px. */
+@media only screen and (min-width: 992px) and (max-width: 1200px) { 
+	.sk-cube-grid {
+	    left: 50%;
+	    top: 30%;
+	}
+	.regular .slick-dots{
+	    bottom: 80px;
+	}
+  	.regular .slick-prev {
+		left: 20px;
+	}
+	.regular .slick-next {
+		right: 20px;
+	}
+	.service-area-2 h3 {
+		font-size: 22px;
+	}
+	.who-we-are-main-content p {
+		margin-bottom: 10px;
+	}
+	.teachers-details {
+		padding: 4px;
+	}
+	.about-eduspace .form-control {
+		width: 200px;
+	}
+	.widget-blog i {
+		margin-right: 5px;
+	}
+	.widget-blog p {
+		margin-left: 3px;
+	}
+	.widget-social ul li {
+		margin-right: 10px;
+	}
+	.news-form .form-control {
+		width: 220px;
+	}
+	.news-form .subscribe-btn {
+		right: 8px;
+	}
+	/*about.html*/
+	.about-main-content-list a {
+		margin-bottom: 5px;
+		font-size: 16px;
+	}
+	.about-main-content p {
+		margin-bottom: 10px;
+	}
+	/* event.html*/
+	.event-content-details {
+		padding: 19px;
+	}
+	.event-discription {
+		margin-bottom: 25px;
+	}
+	/*Blog-list.html*/
+	.blog-list-details ul {
+		margin-bottom: 2px;
+	}
+	.blog-list-details {
+		padding: 9px;
+	}
+	.blog-list-details h4 {
+		margin-top: 18px;
+	}
+}
+/* Tablet Layout: 768px. */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.edu-title p {
+		padding: 0px 15%;
+	}
+	.main-menu li > a {
+		font-size: 13px;
+		padding: 20px 10px;
+	} 
+	.main-menu ul li a .caret i {
+		margin-left: 3px;
+	}
+	.welcome-text{
+		padding-top: 170px;
+	    padding-bottom: 150px;
+	}
+	.regular .slick-prev {
+		left: 25px;
+	}
+	.regular .slick-next {
+		right: 25px;
+	}
+	.regular .slick-dots{
+	    bottom: 40px;
+	}
+	.service-area{
+		margin-bottom: 40px;
+	}
+	.service-area-2{
+		margin-bottom: 40px;
+	}
+	.client-review p {
+		padding: 0 25%;
+	}
+	.about-eduspace .form-control {
+		width: 300px;
+	}
+	.news-form .subscribe-btn {
+		right: 110px;
+	}
+	#scroll-up {
+		bottom: 40px;
+		right: 20px;
+	}
+	/*course.html*/
+	.course-area {
+		margin-bottom: 60px;
+	}
+	/*course.html*/
+	/*event-grid.html*/
+	.event-box {
+		margin-bottom: 60px;
+	}
+	/*event-list.html*/
+	.event-date-title {
+		margin-bottom: 17px;
+	}
+	.event-discription {
+		margin-bottom: 0px;
+	}
+	.event-content-details {
+		padding: 15px;
+	}
+	.event-title h3{
+		font-size: 20px
+	}
+	/*Event-details.html*/
+	.event-perticiption {
+		margin-bottom: 60px;
+	}
+	/*blog-grid.html*/
+	.blog-area {
+		margin-bottom: 60px;
+	}
+	/*Blog-list.html*/
+	.blog-list-img img {
+		width: 100%;
+		border-bottom-left-radius: 0px;
+		border-top-left-radius: 0px;
+	}
+	.blog-list-details {
+		border: 1px solid #20b876;
+		border-radius: 0;
+		border-top: none;
+	}
+	.blog-list-area {
+		margin-bottom: 50px;
+	}
+	/* single-blog.html*/
+	.comment-area {
+		margin-bottom: 60px;
+	}
+}
+/* Mobile Layout: 320px. */
+@media only screen and (max-width: 767px) { 
+	.header-top-bar{
+		display: none;
+	}
+	.edu-title p {
+		padding: 0 6%;
+	}
+	.search-icon{
+		display: none;
+	}
+	.logo img {
+		width: 140px;
+	}
+	.mean-container a.meanmenu-reveal {
+		top: 5px;
+	}
+	.welcome-text{
+		padding-top: 160px;
+		padding-bottom: 150px;
+	}
+	.slider-text{
+		margin-left: 15px;
+	}
+	.welcome-text h1 {
+		font-size: 30px;
+	}
+	.welcome-text h3 {
+		margin: 15px 0px;
+	}
+	.regular .slick-prev {
+	    left: 39%;
+	    top:83%;
+	}
+	.regular .slick-next {
+	    right: 39%;
+	    top:83%;
+	}
+	.service-area {
+		margin-bottom: 80px;
+	}
+	.service-area-2{
+		margin-bottom: 80px;
+	}
+	.course-area {
+		margin-bottom: 80px;
+	}
+	.video-area h2 {
+		font-size: 26px;
+	}
+	.event-box {
+		margin-bottom: 80px;
+	}
+	.client-review p {
+		padding: 0 3%;
+	}
+	.f-wiget-bottom{
+		margin-bottom: 40px
+	}
+	.news-form .form-control{
+		width: 300px;
+	}
+	.news-form .subscribe-btn {
+	    right: 6px;
+	    bottom: 16px;
+	}
+	/* about.html*/
+	.about-content-list {
+		margin-bottom: 40px;
+	}
+	.about-main-content-list {
+		margin-bottom: 0px;
+	}
+	.welcome-contact-text h2 {
+		font-size: 20px;
+	}
+	.welcome-contact-button {
+		margin-top: 45px;
+		text-align: center;
+	}
+	/* about.html*/
+	/*course-details.html*/
+	.course-timeing ul li span::after {
+		left: 9px;
+	}
+	/*course-deatils.html*/
+	/*Event.html*/
+	.event-perticipate-details img {
+		margin: 0 auto;
+	}
+	.no-padding {
+		padding-right: 15px;
+		padding-left: 15px;
+	}
+	.event-content-img img {
+		border-bottom-left-radius: 0px;
+		border-top-left-radius: 0px;
+	}
+	.event-content-details {
+		margin-top: -41px;
+		border: 1px solid #ccc;
+		border-bottom-right-radius: 0px;
+		border-top-right-radius: 0px;
+	}
+	/*Event-details.html*/
+	.event-perticiption {
+		margin-bottom: 60px;
+	}
+	/* Faq.html */
+	.faq-serach .form-control {
+		width: 290px;
+	}
+	.faq-serach .serach-btn {
+		right: 16px;
+		top: 31px;
+	}
+	/*blog-grid.html*/
+	.blog-area {
+		margin-bottom: 80px;
+	}
+	/*Blog-list.html*/
+	.blog-list-img img {
+		width: 100%;
+		border-bottom-left-radius: 0px;
+		border-top-left-radius: 0px;
+	}
+	.blog-list-details {
+		border: 1px solid #20b876;
+		border-radius: 0;
+		border-top: none;
+	}
+	.blog-list-area {
+		margin-bottom: 50px;
+	}
+	/* single-blog.html*/
+	.comment-area {
+		margin-bottom: 60px;
+	}
+	.comment-img {
+		float: none;
+	}
+	.comment-details {
+		margin-left: 10px;
+		margin-top: 15px;
+	}
+	.single-comment:nth-child(2n+1){
+        padding-left: 0px;
+    }
+    .reply-button {
+		float: none;
+		margin-left: 10px;
+		margin-top: 10px;
+	}
+	.edu-header h2 {
+		font-size: 28px;
+	}
+}
+/* Wide Mobile Layout: 480px. */
+@media only screen and (min-width: 480px) and (max-width: 767px) { 
+	.countdown {
+		margin-bottom: 40px;
+		text-align: center;
+		margin-top: 50px;
+	}
+	.about-eduspace .subscribe-btn {
+		right: 166px;
+		bottom: 0px;
+	}
+	.teachers-details {
+		padding: 30px;
+	}
+	.news-form .form-control {
+		width: 300px;
+	}
+	.news-form .subscribe-btn {
+		right: 166px;
+		bottom: 16px;
+	}
+}

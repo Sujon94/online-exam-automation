@@ -1,0 +1,100 @@
+.required:after {
+    content: " *";
+    color: red;
+}
+
+.make-readonly {
+    pointer-events: none;
+    touch-action: none;
+}
+
+.make-readonly-bg {
+    pointer-events: none;
+    touch-action: none;
+    background-color: #F2F4F4;
+    opacity: 1;
+}
+
+.make-select2-readonly-bg .select2-selection {
+    pointer-events: none;
+    touch-action: none;
+    background-color: #F2F4F4;
+    opacity: 1;
+}
+
+.ck-content {
+    min-height: 160px;
+}
+
+@-webkit-keyframes blinker-on {
+    from {
+        opacity: 1.0;
+    }
+    to {
+        opacity: 0.0;
+    }
+}
+
+.blink {
+    color: #ffbe0e !important;
+    text-decoration: blink;
+    -webkit-animation-name: blinker-on;
+    -webkit-animation-duration: 0.6s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-direction: alternate;
+}
+
+.blink:hover {
+    color: white !important;
+    -webkit-animation-name: none;
+}
+
+/*Timer*/
+.height {
+    min-height: 200px;
+}
+
+.timer-container {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.timer-display {
+    font-size: 40px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.pulse-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 10px solid #00ff00; /* Initial border color */
+    background-color: rgba(0, 0, 0, 0.2);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.2;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.4;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.2;
+    }
+}
